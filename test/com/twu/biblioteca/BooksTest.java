@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 public class BooksTest {
@@ -29,21 +29,21 @@ public class BooksTest {
     }
 
     @Test
-    public void testListBooks(){
+    public void testListBooksHaveAddedBooks(){
         books.listBooks();
-        String bookListMsg = "1.Margaret Thatcher: The Autobiography\n" +
-                "2.Benjamin Franklin: An American Life\n" +
-                "3.Steve Jobs: The Exclusive Biography\n";
-        assertEquals(outStream.toString(), bookListMsg);
+        String outPut = outStream.toString();
+        assertTrue(outPut.contains("Margaret Thatcher: The Autobiography"));
+        assertTrue(outPut.contains("Benjamin Franklin: An American Life"));
+        assertTrue(outPut.contains("Steve Jobs: The Exclusive Biography"));
     }
 
     @Test
     public void testBookDetail(){
-        books.bookDetail();
-        String bookinfo = "BookName, Author, Year\n" +
-                "Margaret Thatcher: The Autobiography, " + "Margaret Thatcher, " + "2013\n" +
-                "Benjamin Franklin: An American Life, " + "Walter Isaacson, " + "2004\n" +
-                "Steve Jobs: The Exclusive Biography, " + "Walter Isaacson, " + "2014\n";
-        assertEquals(outStream.toString(), bookinfo);
+        books.listBooks();
+        String outPut = outStream.toString();
+        assertTrue(outPut.contains("BookName, Author, Year\n"));
+        assertTrue(outPut.contains("Margaret Thatcher: The Autobiography, Margaret Thatcher, 2013\n"));
+        assertTrue(outPut.contains("Benjamin Franklin: An American Life, Walter Isaacson, 2004\n"));
+        assertTrue(outPut.contains("Steve Jobs: The Exclusive Biography, Walter Isaacson, 2014\n"));
     }
 }

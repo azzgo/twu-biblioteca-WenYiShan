@@ -29,26 +29,19 @@ public class Books {
         booklist.clear();
     }
 
+
     public void listBooks(){
-        String bookListMsg = "";
-        bookListMsg = joinBooklistToStirng(bookListMsg);
-        System.out.print(bookListMsg);
-    }
-
-    public void bookDetail(){
         System.out.println("BookName, Author, Year");
-        for(HashMap<String, String> book: booklist){
-            System.out.println(book.get("bookName") + ", " +
+        for(int i=0; i < booklist.size(); i++){
+            HashMap<String, String> book = booklist.get(i);
+            System.out.println(
+                (i+1) + "." +
+                book.get("bookName") + ", " +
                 book.get("author") + ", " +
-                book.get("publishYear"));
+                book.get("publishYear")
+            );
         }
     }
 
-    private String joinBooklistToStirng(String bookListMsg) {
-        for(int i = 0; i<booklist.size(); i++){
-            HashMap<String, String> book = booklist.get(i);
-            bookListMsg += (i+1) + "." + book.get("bookName") + '\n';
-        }
-        return bookListMsg;
-    }
+
 }

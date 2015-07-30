@@ -5,9 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BibliotecaAppTest {
 
@@ -25,5 +24,4 @@ public class BibliotecaAppTest {
         bibliotecaApp.WelcomeMsg();
         assertEquals(outStream.toString(), "Welcome to BiblioteApp System!\n");
     }
-
 }
