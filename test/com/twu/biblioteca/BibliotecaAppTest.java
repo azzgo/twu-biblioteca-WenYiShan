@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 public class BibliotecaAppTest {
 
     private BibliotecaApp bibliotecaApp;
-    private ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+    private ByteArrayOutputStream outStream;
 
     @Before
     public void setUp(){
         bibliotecaApp = new BibliotecaApp();
-        System.setOut(new PrintStream(outStream));
+        outStream = helperTools.changeOutStream();
     }
 
     @Test
