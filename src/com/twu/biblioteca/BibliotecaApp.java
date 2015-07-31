@@ -7,7 +7,15 @@ public class BibliotecaApp {
     private boolean quitting = false;
 
     BibliotecaApp(){
-        books = Books.getInstance();
+        books =  new Books();
+    }
+
+    public void init(){
+        books.addBooktolist("Margaret Thatcher: The Autobiography", "Margaret Thatcher", "2013");
+        books.addBooktolist("Benjamin Franklin: An American Life", "Walter Isaacson", "2004");
+        books.addBooktolist("Steve Jobs: The Exclusive Biography", "Walter Isaacson", "2014");
+        books.addCheckedBook("Dear Life: Stories (Vintage International)", "Alice Munro", "2012");
+        books.addCheckedBook("Airport (English Edition))", "Arthur Hailey", "2014");
     }
 
     public void welcomeMsg() {
@@ -32,12 +40,12 @@ public class BibliotecaApp {
                 break;
             case 'C':
             case 'c':
-                System.out.println("Checkout Books:");
+                System.out.println("Checkout Books(Please input the number in listBook):");
                 books.checkOutBooks(scanner);
                 break;
             case 'R':
             case 'r':
-                System.out.println("Return Book");
+                System.out.println("Return Book(Please input the BookName):");
                 books.returnBook(scanner);
                 break;
             case 'Q':
@@ -65,6 +73,8 @@ public class BibliotecaApp {
             }
 
             if(quitting != true){
+                System.out.println("Back to MainMenu!");
+                this.mainMenu();
                 System.out.println("Your another choose is:");
             }else {
                 break;

@@ -18,7 +18,7 @@ public class BooksTest {
 
     @Before
     public void setUp(){
-        books = Books.getInstance();
+        books = new Books();
         books.addBooktolist("Margaret Thatcher: The Autobiography", "Margaret Thatcher", "2013");
         books.addBooktolist("Benjamin Franklin: An American Life", "Walter Isaacson", "2004");
         books.addBooktolist("Steve Jobs: The Exclusive Biography", "Walter Isaacson", "2014");

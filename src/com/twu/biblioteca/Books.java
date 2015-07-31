@@ -7,17 +7,8 @@ import java.util.Scanner;
 public class Books {
 
     private static Books books;
-    private ArrayList<HashMap<String, String>> booklist = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> checkbooks = new ArrayList<>();
-    private Books(){
-    }
-
-    public static Books getInstance(){
-        if(!(books instanceof Books)){
-            books = new Books();
-        }
-        return books;
-    }
+    private ArrayList<HashMap<String, String>> bookList = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> checkedBooks = new ArrayList<>();
 
     public void add(ArrayList<HashMap<String, String>> to, String bookName, String author, String publishYear){
         HashMap<String, String> book = new HashMap<>();
@@ -29,23 +20,23 @@ public class Books {
 
 
     public void addBooktolist(String bookName, String author, String publishYear){
-        add(booklist, bookName, author, publishYear);
+        add(bookList, bookName, author, publishYear);
     }
 
     public void addCheckedBook(String bookName, String author, String publshYear) {
-        add(checkbooks, bookName, author, publshYear);
+        add(checkedBooks, bookName, author, publshYear);
     }
 
     public void clearBooks() {
-        booklist.clear();
-        checkbooks.clear();
+        bookList.clear();
+        checkedBooks.clear();
     }
 
 
     public void listBooks(){
         System.out.println("BookName, Author, Year");
-        for(int i=0; i < booklist.size(); i++){
-            HashMap<String, String> book = booklist.get(i);
+        for(int i=0; i < bookList.size(); i++){
+            HashMap<String, String> book = bookList.get(i);
             System.out.println(
                 (i+1) + "." +
                 book.get("bookName") + ", " +
@@ -56,37 +47,40 @@ public class Books {
     }
 
     public void checkOutBooks(Scanner scanner) {
-        while (scanner.hasNext()){
+        while (scanner.hasNextInt()){
             int i = scanner.nextInt();
-            if(i<0 || i>booklist.size() -1) {
+            if(i<0 || i> bookList.size() -1) {
                 System.out.println("That book is not available.");
                 System.out.println("Please select a different book or fix spelling error:");
                 continue;
             }
-            booklist.remove(i-1);
+            bookList.remove(i - 1);
             System.out.println("Thank you! Enjoy the book");
+            break;
         }
     }
 
     public void returnBook(Scanner scanner) {
-        while (scanner.hasNext()){
+        while (scanner.hasNextLine()){
             String returnBookName = scanner.nextLine().trim();
+            if(returnBookName.isEmpty()) continue;
             if(!checkIfBookIsChecked(returnBookName)){
                 System.out.println("That is not a valid book to return.");
                 System.out.println("Please input a different book or fix spelling error:");
                 continue;
             }
             System.out.println("Thank you for returning the book.");
+            break;
         }
 
     }
 
     private boolean checkIfBookIsChecked(String returnBookName) {
         boolean successReturn = false;
-        for(HashMap<String, String> book: checkbooks){
+        for(HashMap<String, String> book: checkedBooks){
             if(book.get("bookName").equals(returnBookName)){
-                checkbooks.remove(book);
-                booklist.add(book);
+                checkedBooks.remove(book);
+                bookList.add(book);
                 successReturn = true;
                 break;
             }

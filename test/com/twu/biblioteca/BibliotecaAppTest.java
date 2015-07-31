@@ -42,9 +42,9 @@ public class BibliotecaAppTest {
     @Test
     public void testMenuHandler(){
         assertTrue(checkMenuItem('L', "List Books:"));
+        assertTrue(checkMenuItem('C', "Checkout Books(Please input the number in listBook):"));
+        assertTrue(checkMenuItem('R', "Return Book(Please input the BookName):"));
         assertTrue(checkMenuItem('Q', "Quit..."));
-        assertTrue(checkMenuItem('C', "Checkout Books"));
-        assertTrue(checkMenuItem('R', "Return Book"));
     }
 
     @Test
