@@ -68,9 +68,20 @@ public class Books {
         }
     }
 
-
     public void returnBook(Scanner scanner) {
-        String returnBookName = scanner.nextLine().trim();
+        while (scanner.hasNext()){
+            String returnBookName = scanner.nextLine().trim();
+            if(!checkIfBookIsChecked(returnBookName)){
+                System.out.println("That is not a valid book to return.");
+                System.out.println("Please input a different book or fix spelling error:");
+                continue;
+            }
+            System.out.println("Thank you for returning the book.");
+        }
+
+    }
+
+    private boolean checkIfBookIsChecked(String returnBookName) {
         boolean successReturn = false;
         for(HashMap<String, String> book: checkbooks){
             if(book.get("bookName").equals(returnBookName)){
@@ -80,5 +91,6 @@ public class Books {
                 break;
             }
         }
+        return successReturn;
     }
 }

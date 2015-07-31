@@ -91,11 +91,33 @@ public class BooksTest {
         books.listBooks();
         assertFalse(outStream.toString().contains("Airport (English Edition))"));
         outStream.reset();
-        String chooseBooks = "Airport (English Edition))";
-        System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
+        String returnBookName = "Airport (English Edition))";
+        System.setIn(new ByteArrayInputStream(returnBookName.getBytes()));
         Scanner scanner = new Scanner(System.in);
         books.returnBook(scanner);
         books.listBooks();
         assertTrue(outStream.toString().contains("Airport (English Edition))"));
+    }
+
+    @Test
+    public void testSuccessReturn(){
+        String returnBookName = "Airport (English Edition))";
+        System.setIn(new ByteArrayInputStream(returnBookName.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.returnBook(scanner);
+        assertEquals(outStream.toString(), "Thank you for returning the book.\n");
+    }
+
+    @Test
+    public void testFailedReturen(){
+        String returnBookName = "Margaret Thatcher: The Autobiography\nAirport (English Edition))\n";
+        System.setIn(new ByteArrayInputStream(returnBookName.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.returnBook(scanner);
+        String outPut = outStream.toString();
+        String[] shouldHaveStrings = {"That is not a valid book to return.", "Thank you for returning the book."};
+        int [] resultStringIndexes = helperTools.getresultInfoIndexes(shouldHaveStrings, outPut);
+        assertNotEquals(resultStringIndexes[0], -1);
+        assertNotEquals(resultStringIndexes[1], -1);
     }
 }
