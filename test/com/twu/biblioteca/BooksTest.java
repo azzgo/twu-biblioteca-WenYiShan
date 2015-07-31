@@ -19,9 +19,11 @@ public class BooksTest {
     @Before
     public void setUp(){
         books = Books.getInstance();
-        books.add("Margaret Thatcher: The Autobiography", "Margaret Thatcher", "2013");
-        books.add("Benjamin Franklin: An American Life", "Walter Isaacson", "2004");
-        books.add("Steve Jobs: The Exclusive Biography", "Walter Isaacson", "2014");
+        books.addBooktolist("Margaret Thatcher: The Autobiography", "Margaret Thatcher", "2013");
+        books.addBooktolist("Benjamin Franklin: An American Life", "Walter Isaacson", "2004");
+        books.addBooktolist("Steve Jobs: The Exclusive Biography", "Walter Isaacson", "2014");
+        books.addCheckedBook("Dear Life: Stories (Vintage International)", "Alice Munro", "2012");
+        books.addCheckedBook("Airport (English Edition))", "Arthur Hailey", "2014");
         outStream = helperTools.changeOutStream();
     }
 
@@ -82,5 +84,18 @@ public class BooksTest {
         int [] resultStringIndexes = helperTools.getresultInfoIndexes(shouldHaveStrings, outPut);
         assertNotEquals(resultStringIndexes[0], -1);
         assertNotEquals(resultStringIndexes[1], -1);
+    }
+
+    @Test
+    public void testAfterReturnBookTheBookShouldInBookList(){
+        books.listBooks();
+        assertFalse(outStream.toString().contains("Airport (English Edition))"));
+        outStream.reset();
+        String chooseBooks = "Airport (English Edition))";
+        System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.returnBook(scanner);
+        books.listBooks();
+        assertTrue(outStream.toString().contains("Airport (English Edition))"));
     }
 }

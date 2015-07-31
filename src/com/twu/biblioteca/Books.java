@@ -8,6 +8,7 @@ public class Books {
 
     private static Books books;
     private ArrayList<HashMap<String, String>> booklist = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> checkbooks = new ArrayList<>();
     private Books(){
     }
 
@@ -18,16 +19,26 @@ public class Books {
         return books;
     }
 
-    public void add(String bookName,String author,String publishYear){
+    public void add(ArrayList<HashMap<String, String>> to, String bookName, String author, String publishYear){
         HashMap<String, String> book = new HashMap<>();
         book.put("bookName", bookName);
         book.put("author", author);
         book.put("publishYear", publishYear);
-        booklist.add(book);
+        to.add(book);
+    }
+
+
+    public void addBooktolist(String bookName, String author, String publishYear){
+        add(booklist, bookName, author, publishYear);
+    }
+
+    public void addCheckedBook(String bookName, String author, String publshYear) {
+        add(checkbooks, bookName, author, publshYear);
     }
 
     public void clearBooks() {
         booklist.clear();
+        checkbooks.clear();
     }
 
 
@@ -54,6 +65,20 @@ public class Books {
             }
             booklist.remove(i-1);
             System.out.println("Thank you! Enjoy the book");
+        }
+    }
+
+
+    public void returnBook(Scanner scanner) {
+        String returnBookName = scanner.nextLine().trim();
+        boolean successReturn = false;
+        for(HashMap<String, String> book: checkbooks){
+            if(book.get("bookName").equals(returnBookName)){
+                checkbooks.remove(book);
+                booklist.add(book);
+                successReturn = true;
+                break;
+            }
         }
     }
 }
