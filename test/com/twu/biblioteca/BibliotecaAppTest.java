@@ -33,12 +33,13 @@ public class BibliotecaAppTest {
         bibliotecaApp.mainMenu();
         String outPut = outStream.toString();
         assertTrue(outPut.contains("L List Books"));
+        assertTrue(outPut.contains("Q Quit the System"));
     }
 
     @Test
     public void testMenuHandler(){
-        bibliotecaApp.handlerMenuInput('L');
-        assertTrue(outStream.toString().contains("List Books"));
+        assertTrue(checkMenuItem('L', "List Books:"));
+        assertTrue(checkMenuItem('Q', "Quit..."));
     }
 
     @Test
@@ -64,10 +65,11 @@ public class BibliotecaAppTest {
         checkIfAfterChoosedRespondIsRight(shouldHaveStrings, outPrintString);
     }
 
-    @Test
-    public void testClosePrint(){
-        bibliotecaApp.handlerMenuInput('Q');
-        assertTrue(outStream.toString().contains("Quit..."));
+    private boolean checkMenuItem(char option, String shouldPrintMsg) {
+        bibliotecaApp.handlerMenuInput(option);
+        String outPut = outStream.toString();
+        outStream.reset();
+        return outPut.contains(shouldPrintMsg);
     }
 
     private void checkIfAfterChoosedRespondIsRight(String[] shouldHaveStrings, String outPrintString) {

@@ -47,4 +47,12 @@ public class BooksTest {
         assertTrue(outPut.contains("Steve Jobs: The Exclusive Biography, Walter Isaacson, 2014\n"));
     }
 
+    @Test public void testCheckOutBook(){
+        books.checkOutBooks(1);
+        books.checkOutBooks(1);
+        books.listBooks();
+        String outPut = outStream.toString();
+        assertFalse(outPut.contains("Margaret Thatcher"));
+        assertFalse(outPut.contains("Benjamin Franklin"));
+    }
 }

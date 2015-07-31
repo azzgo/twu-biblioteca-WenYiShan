@@ -10,13 +10,6 @@ public class BibliotecaApp {
         books = Books.getInstance();
     }
 
-//    public static void main(String[] args) {
-//        BibliotecaApp bibliotecaApp = new BibliotecaApp();
-//        bibliotecaApp.WelcomeMsg();
-//        bibliotecaApp.mainMenu();
-//        bibliotecaApp.exec();
-//    }
-
     public void WelcomeMsg() {
         System.out.println("Welcome to BiblioteApp System!");
     }
@@ -24,6 +17,7 @@ public class BibliotecaApp {
     public void mainMenu() {
         System.out.println("There are Serval option You can choose to Manipulate This System:");
         System.out.println("L List Books");
+        System.out.println("Q Quit the System");
         System.out.println("Your choose is(Regardless of the case):");
     }
 

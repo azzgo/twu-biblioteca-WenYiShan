@@ -43,4 +43,8 @@ public class Books {
         }
     }
 
+    public void checkOutBooks(int i) {
+        if(i<0 || i>booklist.size() -1) return;
+        booklist.remove(i-1);
+    }
 }
