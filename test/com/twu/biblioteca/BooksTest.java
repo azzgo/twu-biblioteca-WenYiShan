@@ -49,7 +49,8 @@ public class BooksTest {
         assertTrue(outPut.contains("Steve Jobs: The Exclusive Biography, Walter Isaacson, 2014\n"));
     }
 
-    @Test public void testCheckOutBook(){
+    @Test
+    public void testAfterCheckOutBookCheckedBookShouldnotInBookList(){
         String chooseBooks = "1\n1\n";
         System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
         Scanner scanner = new Scanner(System.in);
@@ -59,5 +60,27 @@ public class BooksTest {
         String outPut = outStream.toString();
         assertFalse(outPut.contains("Margaret Thatcher"));
         assertFalse(outPut.contains("Benjamin Franklin"));
+    }
+
+    @Test
+    public void testSuccessCheckBook(){
+        String chooseBooks = "1\n";
+        System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.checkOutBooks(scanner);
+        assertEquals(outStream.toString(), "Thank you! Enjoy the book\n");
+    }
+
+    @Test
+    public void testFailedCheckBookAndCanCheckAgain(){
+        String chooseBooks = "-1\n1\n";
+        System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.checkOutBooks(scanner);
+        String outPut = outStream.toString();
+        String[] shouldHaveStrings = {"That book is not available.", "Thank you! Enjoy the book"};
+        int [] resultStringIndexes = helperTools.getresultInfoIndexes(shouldHaveStrings, outPut);
+        assertNotEquals(resultStringIndexes[0], -1);
+        assertNotEquals(resultStringIndexes[1], -1);
     }
 }

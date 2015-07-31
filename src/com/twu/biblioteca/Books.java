@@ -45,8 +45,15 @@ public class Books {
     }
 
     public void checkOutBooks(Scanner scanner) {
-        int i = scanner.nextInt();
-        if(i<0 || i>booklist.size() -1) return;
-        booklist.remove(i-1);
+        while (scanner.hasNext()){
+            int i = scanner.nextInt();
+            if(i<0 || i>booklist.size() -1) {
+                System.out.println("That book is not available.");
+                System.out.println("Please select a different book or fix spelling error:");
+                continue;
+            }
+            booklist.remove(i-1);
+            System.out.println("Thank you! Enjoy the book");
+        }
     }
 }

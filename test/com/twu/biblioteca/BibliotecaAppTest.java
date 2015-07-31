@@ -58,7 +58,6 @@ public class BibliotecaAppTest {
                 "Select a valid option!",
                 "Select a valid option!"
         };
-
         System.setIn(new ByteArrayInputStream(inputOption.getBytes()));
         bibliotecaApp.exec();
         String outPrintString = outStream.toString();
@@ -73,20 +72,11 @@ public class BibliotecaAppTest {
     }
 
     private void checkIfAfterChoosedRespondIsRight(String[] shouldHaveStrings, String outPrintString) {
-        int[] resultInfoIndexes = getresultInfoIndexes(shouldHaveStrings, outPrintString);
+        int[] resultInfoIndexes = helperTools.getresultInfoIndexes(shouldHaveStrings, outPrintString);
         assertNotEquals(resultInfoIndexes[0], -1);
         assertNotEquals(resultInfoIndexes[1], -1);
         assertNotEquals(resultInfoIndexes[2], -1);
         assertEquals(resultInfoIndexes[3], -1);
         assertEquals(resultInfoIndexes[4], -1);
-    }
-
-    private int[] getresultInfoIndexes(String[] shouldHaveStrings, String outPrintString) {
-        int[] resultInfoIndexes = new int[shouldHaveStrings.length];
-        for(int i=0; i< resultInfoIndexes.length; i++){
-            resultInfoIndexes[i] = outPrintString.indexOf(shouldHaveStrings[i]);
-            outPrintString = resultInfoIndexes[i] == -1? outPrintString : outPrintString.substring(resultInfoIndexes[i]);
-        }
-        return resultInfoIndexes;
     }
 }
