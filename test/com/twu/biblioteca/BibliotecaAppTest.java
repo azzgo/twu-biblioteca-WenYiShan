@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -24,7 +25,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void testWelcomeMsg(){
-        bibliotecaApp.WelcomeMsg();
+        bibliotecaApp.welcomeMsg();
         assertEquals(outStream.toString(), "Welcome to BiblioteApp System!\n");
     }
 
@@ -34,17 +35,21 @@ public class BibliotecaAppTest {
         String outPut = outStream.toString();
         assertTrue(outPut.contains("L List Books"));
         assertTrue(outPut.contains("Q Quit the System"));
+        assertTrue(outPut.contains("C Checkout Books"));
+        assertTrue(outPut.contains("R Return Book"));
     }
 
     @Test
     public void testMenuHandler(){
         assertTrue(checkMenuItem('L', "List Books:"));
         assertTrue(checkMenuItem('Q', "Quit..."));
+        assertTrue(checkMenuItem('C', "Checkout Books"));
+        assertTrue(checkMenuItem('R', "Return Book"));
     }
 
     @Test
     public void testMenuHandlerOnInvaidOption(){
-        bibliotecaApp.handlerMenuInput('!');
+        bibliotecaApp.handlerMenuInput('!', null);
         assertTrue(outStream.toString().contains("Select a valid option!"));
     }
 
@@ -65,7 +70,7 @@ public class BibliotecaAppTest {
     }
 
     private boolean checkMenuItem(char option, String shouldPrintMsg) {
-        bibliotecaApp.handlerMenuInput(option);
+        bibliotecaApp.handlerMenuInput(option, new Scanner(System.in));
         String outPut = outStream.toString();
         outStream.reset();
         return outPut.contains(shouldPrintMsg);
