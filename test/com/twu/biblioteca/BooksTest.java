@@ -5,7 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -48,8 +50,11 @@ public class BooksTest {
     }
 
     @Test public void testCheckOutBook(){
-        books.checkOutBooks(1);
-        books.checkOutBooks(1);
+        String chooseBooks = "1\n1\n";
+        System.setIn(new ByteArrayInputStream(chooseBooks.getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        books.checkOutBooks(scanner);
+        books.checkOutBooks(scanner);
         books.listBooks();
         String outPut = outStream.toString();
         assertFalse(outPut.contains("Margaret Thatcher"));

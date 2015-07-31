@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Books {
 
@@ -43,7 +44,8 @@ public class Books {
         }
     }
 
-    public void checkOutBooks(int i) {
+    public void checkOutBooks(Scanner scanner) {
+        int i = scanner.nextInt();
         if(i<0 || i>booklist.size() -1) return;
         booklist.remove(i-1);
     }
