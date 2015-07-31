@@ -38,7 +38,7 @@ public class BooksTest {
     }
 
     @Test
-    public void testBookDetail(){
+    public void testListBooksHaveEachDetaiInfo(){
         books.listBooks();
         String outPut = outStream.toString();
         assertTrue(outPut.contains("BookName, Author, Year\n"));
