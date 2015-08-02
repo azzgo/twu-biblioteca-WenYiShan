@@ -23,7 +23,7 @@ Return Book - As a librarian, I would like customers to be able to return a book
 
 9. **Unsuccessful Return** - As a customer, I would like to be notified if the book I am returning has not been added to this library by seeing the message, “That is not a valid book to return.”, so that I can return it to the correct library or fix my spelling error.
 
-# Release 2(tag BiblioteceV1)
+# Release 2(tag BiblioteceV2)
 
 1. **List Movies** - As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out. Movies have a name, year, director and movie rating (from 1-10 or unrated).
 
