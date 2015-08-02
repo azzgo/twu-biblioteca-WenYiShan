@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Movies {
     private ArrayList<Map<String, String>> movielist;
@@ -32,5 +33,19 @@ public class Movies {
                    movie.get("rating")
            );
        }
+    }
+
+    public void checkOutMovie(Scanner scanner) {
+        while (scanner.hasNextInt()){
+            int i = scanner.nextInt();
+            if(i<0 || i> movielist.size() -1) {
+                System.out.println("That Movie is not available.");
+                System.out.println("Please select a different Movie or fix spelling error:");
+                continue;
+            }
+            movielist.remove(i - 1);
+            System.out.println("Thank you! Enjoy the Movie");
+            break;
+        }
     }
 }

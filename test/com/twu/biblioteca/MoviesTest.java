@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 public class MoviesTest {
     private Movies movies;
@@ -27,4 +29,14 @@ public class MoviesTest {
         assertTrue(outPut.contains("The In-Laws, 1979, Arthur Hiller, 7.9"));
         assertTrue(outPut.contains("True Stories, 1986, David Byrne, 8.6"));
     }
+
+    @Test
+    public void TestAfterCheckedMovieIFStillInMovieList(){
+        String choose = "1";
+        System.setIn(new ByteArrayInputStream(choose.getBytes()));
+        movies.checkOutMovie(new Scanner(System.in));
+        movies.listMovies();
+        assertFalse(outStream.toString().contains("Alistar Legrand"));
+    }
+
 }

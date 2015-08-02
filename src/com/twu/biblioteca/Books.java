@@ -2,15 +2,16 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Books {
 
     private static Books books;
-    private ArrayList<HashMap<String, String>> bookList = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> checkedBooks = new ArrayList<>();
+    private ArrayList<Map<String, String>> bookList = new ArrayList<>();
+    private ArrayList<Map<String, String>> checkedBooks = new ArrayList<>();
 
-    public void add(ArrayList<HashMap<String, String>> to, String bookName, String author, String publishYear){
+    public void add(ArrayList<Map<String, String>> to, String bookName, String author, String publishYear){
         HashMap<String, String> book = new HashMap<>();
         book.put("bookName", bookName);
         book.put("author", author);
@@ -36,7 +37,7 @@ public class Books {
     public void listBooks(){
         System.out.println("BookName, Author, Year");
         for(int i=0; i < bookList.size(); i++){
-            HashMap<String, String> book = bookList.get(i);
+            Map<String, String> book = bookList.get(i);
             System.out.println(
                 (i+1) + "." +
                 book.get("bookName") + ", " +
@@ -46,7 +47,7 @@ public class Books {
         }
     }
 
-    public void checkOutBooks(Scanner scanner) {
+    public String checkOutBooks(Scanner scanner) {
         while (scanner.hasNextInt()){
             int i = scanner.nextInt();
             if(i<0 || i> bookList.size() -1) {
@@ -54,13 +55,15 @@ public class Books {
                 System.out.println("Please select a different book or fix spelling error:");
                 continue;
             }
-            bookList.remove(i - 1);
+            Map<String, String> book= bookList.remove(i - 1);
+            checkedBooks.add(book);
             System.out.println("Thank you! Enjoy the book");
-            break;
+            return book.get("bookName");
         }
+        return null;
     }
 
-    public void returnBook(Scanner scanner) {
+    public String returnBook(Scanner scanner) {
         while (scanner.hasNextLine()){
             String returnBookName = scanner.nextLine().trim();
             if(returnBookName.isEmpty()) continue;
@@ -70,14 +73,14 @@ public class Books {
                 continue;
             }
             System.out.println("Thank you for returning the book.");
-            break;
+            return returnBookName;
         }
-
+        return null;
     }
 
     private boolean checkIfBookIsChecked(String returnBookName) {
         boolean successReturn = false;
-        for(HashMap<String, String> book: checkedBooks){
+        for(Map<String, String> book: checkedBooks){
             if(book.get("bookName").equals(returnBookName)){
                 checkedBooks.remove(book);
                 bookList.add(book);

@@ -33,18 +33,26 @@ public class BibliotecaAppTest {
     public void testMainMenuPrint(){
         bibliotecaApp.mainMenu();
         String outPut = outStream.toString();
-        assertTrue(outPut.contains("L List Books"));
-        assertTrue(outPut.contains("Q Quit the System"));
-        assertTrue(outPut.contains("C Checkout Books"));
-        assertTrue(outPut.contains("R Return Book"));
+        assertTrue(outPut.contains("1 List Books"));
+        assertTrue(outPut.contains("2 List Movies"));
+        assertTrue(outPut.contains("3 Checkout Book"));
+        assertTrue(outPut.contains("4 Checkout Movie"));
+        assertTrue(outPut.contains("5 Return Book"));
+        assertTrue(outPut.contains("6 Look UserInfo"));
+        assertTrue(outPut.contains("7 MainMenu"));
+        assertTrue(outPut.contains("0 Quit the System"));
     }
 
     @Test
     public void testMenuHandler(){
-        assertTrue(checkMenuItem('L', "List Books:"));
-        assertTrue(checkMenuItem('C', "Checkout Books(Please input the number in listBook):"));
-        assertTrue(checkMenuItem('R', "Return Book(Please input the BookName):"));
-        assertTrue(checkMenuItem('Q', "Quit..."));
+        assertTrue(checkMenuItem(1, "List Books:"));
+        assertTrue(checkMenuItem(2, "List Movies:"));
+        assertTrue(checkMenuItem(3, "Checkout Books(Please input the number in listBook):"));
+        assertTrue(checkMenuItem(4, "Checkout Movies(Please input the number in listBook):"));
+        assertTrue(checkMenuItem(5, "Return Book(Please input the BookName):"));
+        assertTrue(checkMenuItem(6, "Your User Info is:"));
+        assertTrue(checkMenuItem(7, "Show MainMenu"));
+        assertTrue(checkMenuItem(0, "Quit..."));
     }
 
     @Test
@@ -55,7 +63,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void testIfCanInputOptionUntilQuit(){
-        String inputOption = "1\nL\nQ\n1\n2\n";
+        String inputOption = "-1\n1\n0\n-1\n-1\n";
         String[] shouldHaveStrings = {
                 "Select a valid option!",
                 "List Books:",
@@ -69,7 +77,7 @@ public class BibliotecaAppTest {
         checkIfAfterChoosedRespondIsRight(shouldHaveStrings, outPrintString);
     }
 
-    private boolean checkMenuItem(char option, String shouldPrintMsg) {
+    private boolean checkMenuItem(int option, String shouldPrintMsg) {
         bibliotecaApp.handlerMenuInput(option, new Scanner(System.in));
         String outPut = outStream.toString();
         outStream.reset();

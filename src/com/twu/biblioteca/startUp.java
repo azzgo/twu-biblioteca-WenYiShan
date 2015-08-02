@@ -6,6 +6,7 @@ public class startUp {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.init();
         bibliotecaApp.welcomeMsg();
+        bibliotecaApp.login();
         bibliotecaApp.mainMenu();
         bibliotecaApp.exec();
     }
